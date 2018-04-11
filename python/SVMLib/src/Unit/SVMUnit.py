@@ -13,7 +13,7 @@ if __name__ == "__main__":
     dataSet, labelSet = DataUtil.loadTempDataForSVMOrLRModel("bank-addtional-format-svm")
     dataSet, labelSet = DataUtil.underSampling(dataSet, labelSet, 1, -1)
     trainSet, trainLabel, testSet, testLabel = DataUtil.generateTrainSet(dataSet, labelSet)
-    kTup = ("lin", 1.3)
+    kTup = ("lin", 1.2)
     alphas, b = SVMLib.realSMO(trainSet, trainLabel, 0.6, 0.01, kTup, 10)
     errorCount = 0
     sv, svl = SVMLib.getSupportVectorandSupportLabel(trainSet, trainLabel, alphas)
