@@ -3,9 +3,9 @@ Created on 2018年4月23日
 
 @author: IL MARE
 '''
-import tensorflow as tf
+from tensorflow.examples.tutorials.mnist import input_data
 
 if __name__ == "__main__":
-    hello = tf.constant("Hello,tensroflow")
-    sess = tf.Session()
-    print(sess.run(hello).decode("utf_8"))
+    mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
+    print(mnist.train.images.shape, mnist.validation.images.shape)
+        
