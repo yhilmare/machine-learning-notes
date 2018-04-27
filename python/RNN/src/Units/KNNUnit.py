@@ -151,3 +151,13 @@ if __name__ == "__main__":
                             print(log_str)
                 final_embeddings = normalized_embeddings.eval()
                 print(final_embeddings, final_embeddings.shape)
+                sim = similarity.eval()
+                for i in range(vaildSize):
+                    row = -sim[i, :]
+                    log_str = "Nearst to %s :" % (reverse_dic[vaildExamples[i]])
+                    for index in row.argsort()[1: 9]:
+                        possible = row[index]
+                        str = reverse_dic[index]
+                        log_str = "%s %s - <%.3f>," % (log_str, str, -possible)
+                    print(log_str)
+                        
