@@ -78,7 +78,7 @@ def generate_batch(batchSize, skipWindow, numSkip, data):
             target_to_void.append(target)
             batch[i * numSkip + j] = buffer[skipWindow]
             labels[i * numSkip + j, 0] = buffer[target]
-        buffer.append(dataIndex)
+        buffer.append(data[dataIndex])
         dataIndex = (dataIndex + 1) % len(data)
     return batch, labels
 
@@ -93,14 +93,13 @@ vaildExamples = np.random.choice(vaildWindow, vaildSize, replace=False)#随机�
 numSampled = 64#噪声词汇的数目
 
 if __name__ == "__main__":
-#     fileName = "text8.zip"
-#     download_file(fileName, 31344016)
-#     words = read_data(fileName)
-#     data, count, dic, reverse_dic = build_dataSet(words)
-#     print("Most Common Words (+UNK): ", count[:5])
-#     print("Sample data: ", data[: 10], [reverse_dic[i] for i in data[: 10]])
-#     del words
-#     batch, labels = generate_batch(batchSize, skipWindow, numSkip, data)
+    fileName = "text8.zip"
+    download_file(fileName, 31344016)
+    words = read_data(fileName)
+    data, count, dic, reverse_dic = build_dataSet(words)
+    print("Most Common Words (+UNK): ", count[:5])
+    print("Sample data: ", data[: 10], [reverse_dic[i] for i in data[: 10]])
+    del words
     graph = tf.Graph()
     with graph.as_default():
         trainInputs = tf.placeholder(tf.int32, [batchSize])
@@ -108,10 +107,47 @@ if __name__ == "__main__":
         vaildDataSet = tf.constant(vaildExamples, tf.int32)
         with tf.device("/cpu:0"):
             embeddings = tf.Variable(
-                tf.random_uniform((vocabularySize, embeddingSize), -1, 1, tf.float32))
+                tf.random_uniform([vocabularySize, embeddingSize], -1.0, 1.0))
             embed = tf.nn.embedding_lookup(embeddings, trainInputs)
             nceWeight = tf.Variable(tf.truncated_normal
-                        ([vocabularySize, embeddingSize], stddev =  1.0 / math.sqrt(embeddingSize)))
-            nceBiases = tf.Variable(tf.zeros([vocabularySize]))            
-        
-          
+                        ([vocabularySize, embeddingSize], stddev=1.0 / math.sqrt(embeddingSize)))
+            nceBiases = tf.Variable(tf.zeros([vocabularySize]))
+            nceLoss = tf.reduce_mean(tf.nn.nce_loss(nceWeight, 
+                                     nceBiases, 
+                                     trainLabels, 
+                                     embed, 
+                                     numSampled, 
+                                     vocabularySize))
+            optimizer = tf.train.GradientDescentOptimizer(0.5).minimize(nceLoss)
+            normal = tf.sqrt(tf.reduce_sum(tf.square(embeddings), 1, keepdims=True))
+            normalized_embeddings = embeddings / normal
+            vaild_embeddings = tf.nn.embedding_lookup(normalized_embeddings, vaildDataSet)
+            similarity = tf.matmul(vaild_embeddings, tf.transpose(normalized_embeddings))
+            init = tf.global_variables_initializer()
+            num_step = 100000
+            with tf.Session(graph=graph) as sess:
+                init.run()
+                print("initialized...")
+                average_loss = 0
+                for step in range(num_step):
+                    batch, labels = generate_batch(batchSize, skipWindow, numSkip, data)
+                    feed_dict = {trainInputs: batch, trainLabels: labels}
+                    _, loss_val = sess.run([optimizer, nceLoss], feed_dict=feed_dict)
+                    average_loss += loss_val
+                    if step % 2000 == 0:
+                        average_loss /= 2000.0
+                        print("Average loss at step ", step, " is " , average_loss)
+                        average_loss = 0
+                    if step % 10000 == 0:
+                        sim = similarity.eval()
+                        for i in range(vaildSize):
+                            vaildWord = reverse_dic[vaildExamples[i]]
+                            top_k = 8
+                            nearst = (-sim[i, :]).argsort()[1: top_k + 1]
+                            log_str = "Nearst to %s: " % (vaildWord)
+                            for j in range(top_k):
+                                close_word = reverse_dic[nearst[j]]
+                                log_str = "%s %s," % (log_str, close_word)
+                            print(log_str)
+                final_embeddings = normalized_embeddings.eval()
+                print(final_embeddings, final_embeddings.shape)
