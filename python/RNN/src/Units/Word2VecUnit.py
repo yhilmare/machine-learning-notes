@@ -11,6 +11,7 @@ import collections
 import numpy as np
 import random
 import math
+import shelve
 
 url = "http://mattmahoney.net/dc/"
 vocabularySize = 5000
@@ -162,3 +163,7 @@ if __name__ == "__main__":
                         str = reverse_dic[index]
                         log_str = "%s %s - <%.3f>," % (log_str, str, -possible)
                     print(log_str)
+                with shelve.open("parameter") as fp:
+                    fp["word2vec"] = final_embeddings
+                    fp["reverse_dic"] = reverse_dic
+                    fp["dic"] = dic
