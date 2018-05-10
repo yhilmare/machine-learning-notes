@@ -4,8 +4,6 @@ Created on 2018年5月5日
 @author: IL MARE
 '''
 from tensorflow.examples.tutorials.mnist import input_data
-from matplotlib import pyplot as plt
-import numpy as np
 import tensorflow as tf
 from tensorflow.contrib import rnn
 from tensorflow.python.framework import graph_util
@@ -52,7 +50,9 @@ if __name__ == "__main__":
         sess.run(train_step, feed_dict={_x: batch_x, y: batch_y, keep_prob: 1.0})
         if i % 200 == 0:
             print(accuracy.eval(feed_dict={_x: batch_x, y: batch_y, keep_prob: 1.0}))
-    graph_def = tf.get_default_graph().as_graph_def()
-    output_graph_def = graph_util.convert_variables_to_constants(sess, graph_def, ["predict", "x", "keep_prob"])
-    with tf.gfile.GFile(r"G:/Machine-Learning-Study-Notes/python/RNN/model.pb", "wb") as fp:
-        fp.write(output_graph_def.SerializeToString())
+    saver = tf.train.Saver()
+    saver.save(sess, r"G:/Machine-Learning-Study-Notes/python/RNN/model.ckpt")
+#     graph_def = tf.get_default_graph().as_graph_def()
+#     output_graph_def = graph_util.convert_variables_to_constants(sess, graph_def, ["predict", "x", "keep_prob"])
+#     with tf.gfile.GFile(r"G:/Machine-Learning-Study-Notes/python/RNN/model.pb", "wb") as fp:
+#         fp.write(output_graph_def.SerializeToString())

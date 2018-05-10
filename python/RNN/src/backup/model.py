@@ -39,12 +39,31 @@ class CharRNN:
         self.train_keep_prob = train_keep_prob
         self.use_embedding = use_embedding
         self.embedding_size = embedding_size
-
+        
+        '''
+                        重置默认计算图
+        '''
         tf.reset_default_graph()
+        '''
+                        初始化输入，定义输入placeholder，输出placeholder，dropout的keep_prob
+                        同时，如果是输入汉字，还需要使用embedding矩阵对汉字进行编码.
+        '''
         self.build_inputs()
+        '''
+                        通过lstm计算出输出，然后再softmax输出
+        '''
         self.build_lstm()
+        '''
+                        计算损失函数，用了交叉熵
+        '''
         self.build_loss()
+        '''
+                        初始化了优化器，做了避免梯度爆炸的处理
+        '''
         self.build_optimizer()
+        '''
+                        模型保存
+        '''
         self.saver = tf.train.Saver()
 
     def build_inputs(self):
@@ -106,6 +125,11 @@ class CharRNN:
         self.optimizer = train_op.apply_gradients(zip(grads, tvars))
 
     def train(self, batch_generator, max_steps, save_path, save_every_n, log_every_n):
+        '''
+        batche_generator：训练集产生迭代器，每迭代一次产生一个batch
+        max_step：最多的优化迭代次数
+                        后面的三个参数无关痛痒
+        '''
         self.session = tf.Session()
         with self.session as sess:
             sess.run(tf.global_variables_initializer())
@@ -137,9 +161,23 @@ class CharRNN:
             self.saver.save(sess, os.path.join(save_path, 'model'), global_step=step)
 
     def sample(self, n_samples, prime, vocab_size):
+        '''
+        n_sample:产生的最大长度，也就是产生最多多少个句子
+        prime:最开始输入的句子的向量
+        vocab_size：词汇表大小
+        '''
+        '''
+                        取出初始输入句子中的每一个字
+        '''
         samples = [c for c in prime]
         sess = self.session
+        '''
+                        初始化神经网络状态
+        '''
         new_state = sess.run(self.initial_state)
+        '''
+                        产生一个预测
+        '''
         preds = np.ones((vocab_size, ))  # for prime=[]
         for c in prime:
             x = np.zeros((1, 1))

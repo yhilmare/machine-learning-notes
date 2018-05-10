@@ -9,14 +9,32 @@ import time
 import tensorflow as tf
 import pickle
 
-
+'''
+n_seqs可以理解为一个batch中的句子数
+n_step可以理解为一个句子中的单词数或汉字数
+batch_size就是一个batch中一共包含的单词数或汉字数
+n_batch即为全部训练文章中的所有词能够组成的batch总数
+'''
 def batch_generator(arr, n_seqs, n_steps):
     arr = copy.copy(arr)
     batch_size = n_seqs * n_steps
     n_batches = int(len(arr) / batch_size)
+    '''
+            截断训练集，让训练集的大小刚好为batch_size的整数倍
+    '''
     arr = arr[:batch_size * n_batches]
+    '''
+            将整个训练集以句子长度划分为一个矩阵
+    '''
     arr = arr.reshape((n_seqs, -1))
+    '''
+            以下代码产生训练集，每次函数返回一个x和y，其中，x是一个batch大小（n_seq,n_step），相应的标签y跟x也是相同的大小
+            只是y将x矩阵的第一列与最后一列互换，产生了标签y。最后用yield返回。
+    '''
     while True:
+        '''
+                        将arr中的元素随机排列
+        '''
         np.random.shuffle(arr)
         for n in range(0, arr.shape[1], n_steps):
             x = arr[:, n:n + n_steps]
