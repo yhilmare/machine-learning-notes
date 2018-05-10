@@ -7,12 +7,6 @@ import collections
 import numpy as np
 from tensorflow.contrib import rnn
 import tensorflow as tf
-import shelve
-import os
-
-path = r"G:/Machine-Learning-Study-Notes/python/RNN/modelFile/jay.txt"
-save_path = r"G:/Machine-Learning-Study-Notes/python/RNN/modelFile/jay.ckpt"
-obj_path = r"G:/Machine-Learning-Study-Notes/python/RNN/modelFile/corpus"
 
 def pick_top_n(preds, vocab_size, top_n=5):
     p = np.squeeze(preds)
@@ -27,14 +21,15 @@ def pick_top_n(preds, vocab_size, top_n=5):
 class lstm_model:
     def __init__(self, hidden_size, num_layer, 
                  corpus, keep_prob, 
-                 embedding_size, lr, max_step, 
-                 sampling=False):
+                 embedding_size, lr, max_step,
+                 save_path, sampling=False):
         if not sampling:
             self._num_seq = corpus.num_seq
             self._num_step = corpus.num_step
         else:
             self._num_seq = 1
             self._num_step = 1
+            self._save_path = save_path
         self._lr = lr
         self._max_step = max_step
         self._embedding_size = embedding_size
@@ -52,45 +47,30 @@ class lstm_model:
                                       shape=[self._num_seq, self._num_step])
         with tf.device("/cpu:0"):
             embedding = tf.get_variable("embedding", 
-                                        shape=[self._corpus.word_num + 1, 
+                                        shape=[self._corpus.word_num, 
                                                self._embedding_size], dtype=tf.float32)
             self._inputs = tf.nn.embedding_lookup(embedding, self._x)
     def build_lstm(self):
         def build_cell():
-            with tf.name_scope("lstm"):
-                cell = rnn.BasicLSTMCell(self._hidden_size, 1.0, True)
-                cell = rnn.DropoutWrapper(cell, output_keep_prob=self._keep_prob)
-                return cell
+            cell = rnn.BasicLSTMCell(self._hidden_size, forget_bias=1.0, state_is_tuple=True)
+            cell = rnn.DropoutWrapper(cell, output_keep_prob=self._keep_prob)
+            return cell
         mul_cell = rnn.MultiRNNCell([build_cell() for _ in range(self._num_layer)], 
                                     state_is_tuple=True)
-        self._init_state = state = mul_cell.zero_state(self._num_seq, dtype=tf.float32)
-        outputs = []
-        for step in range(self._num_step):
-            output, state = mul_cell(self._inputs[:, step, :], state)
-            outputs.append(output)
+        self._init_state = mul_cell.zero_state(self._num_seq, dtype=tf.float32)
+        outputs, self._final_state = tf.nn.dynamic_rnn(mul_cell, self._inputs, 
+                                                       initial_state=self._init_state)
+        outputs = tf.reshape(outputs, [-1, self._hidden_size])
         W = tf.Variable(tf.truncated_normal([self._hidden_size, self._corpus.word_num], 
                                             stddev=0.1, dtype=tf.float32))
         bais = tf.Variable(tf.zeros([1, self._corpus.word_num], 
                                     dtype=tf.float32), dtype=tf.float32)
-        self._prediction = []
-        for h_state in outputs:
-            self._prediction.append(tf.nn.softmax(tf.matmul(h_state, W) + bais))
+        self._prediction = tf.nn.softmax(tf.matmul(outputs, W) + bais)
     def define_loss(self):
         self._y = tf.placeholder(dtype=tf.int32, shape=[self._num_seq, self._num_step])
-        y_one_hot = tf.one_hot(self._y, self._corpus.word_num)
-        self._loss = 0
-        count = len(self._prediction)
-        for i in range(count):
-            pre = self._prediction[i]
-            self._loss += -tf.reduce_mean(tf.reduce_sum(y_one_hot[:, i, :] * 
-                                                        tf.log(tf.clip_by_value(pre, 1e-8, 1)), 
-                                                        reduction_indices=[1]))
-        self._accuracy = 0
-        for i in range(count):
-            pre = self._prediction[i]
-            self._accuracy += tf.reduce_mean(tf.cast(tf.equal(tf.argmax(y_one_hot[:, i, :], 1), 
-                                                         tf.argmax(pre, 1)), tf.float32))
-        self._accuracy /= count
+        y_one_hot = tf.reshape(tf.one_hot(self._y, self._corpus.word_num), self._prediction.shape)
+        self._loss = -tf.reduce_mean(tf.reduce_sum(y_one_hot * tf.log(self._prediction), 
+                                                   reduction_indices=[1]))
     def define_gradients(self):
         vars = tf.trainable_variables()
         grads, _ = tf.clip_by_global_norm(tf.gradients(self._loss, vars), 5)
@@ -99,41 +79,45 @@ class lstm_model:
     def train(self):
         with tf.Session() as sess:
             sess.run(tf.global_variables_initializer())
+            state = sess.run(self._init_state)
             step = 0
             for x, y in self._corpus.generate_batch():
                 feed = {self._x: x, 
-                        self._y: y}
-                accuracy, loss, _, prediction = sess.run([self._accuracy, self._loss, 
-                                                          self._optimizer, self._prediction], 
-                                                         feed_dict = feed)
+                        self._y: y,
+                        self._init_state:state}
+                loss, _, state = sess.run([self._loss, self._optimizer, 
+                                           self._final_state], feed_dict = feed)
                 step += 1
-                if step % 200 == 0:
-                    print("迭代次数：{0:d}，当前准曲率：{1:.3f}，当前损失：{2:.3f}".format(step, accuracy, loss))
+                if step % 10 == 0:
+                    print("迭代次数：{0:d}/{2:d}，当前损失：{1:.3f}".format(step, loss, self._max_step))
                 if step == self._max_step:
                     break
-            tf.train.Saver().save(sess, save_path)
+            tf.train.Saver().save(sess, "{0}model".format(self._save_path), global_step=step)
     def load_model(self):
         sess = tf.Session()
-        tf.train.Saver().restore(sess, save_path)
+        tf.train.Saver().restore(sess, tf.train.latest_checkpoint(self._save_path))
         self._sess = sess
     def sampling(self, init_str, max_sample=30):
         sample = [c for c in init_str]
-        self._sess.run(tf.global_variables_initializer())
+        pre = np.ones((self._corpus.word_num, ))
+        state = self._sess.run(self._init_state)
         for c in sample:
-            feed = {self._x: np.reshape(c, [1, 1])}
-            pre = self._sess.run(self._prediction, feed_dict=feed)[0]
-        c = pick_top_n(pre[0], 3500)
+            feed = {self._x: np.reshape(c, [1, 1]),
+                    self._init_state: state}
+            pre, state = self._sess.run([self._prediction, self._final_state], 
+                                 feed_dict=feed)
+        c = pick_top_n(pre, self._corpus.word_num)
         sample.append(c)
         for count in range(max_sample):
             x = np.zeros([1, 1])
             x[0][0] = c
-            feed = {self._x: x}
-            pre = self._sess.run(self._prediction, feed_dict=feed)[0]
-            c = pick_top_n(pre[0], 3500)
-#             c = np.argsort(pre[0])[-1]
+            feed = {self._x: x, 
+                    self._init_state: state}
+            pre, state = self._sess.run([self._prediction, self._final_state], 
+                                        feed_dict=feed)
+            c = pick_top_n(pre, self._corpus.word_num)
             sample.append(c)
         return sample
-            
 
 class corpus:
     '''
@@ -168,7 +152,7 @@ class corpus:
         return self._file_path
     @property
     def word_num(self):
-        return len(self._int_to_word)
+        return len(self._int_to_word) + 1
     @property
     def batch_size(self):
         return self._batch_size
@@ -188,7 +172,7 @@ class corpus:
     def word_to_int(self, word):
         return self._word_to_int.get(word, len(self._int_to_word))
     def int_to_word(self, index):
-        return self._int_to_word.get(index, "unknown")
+        return self._int_to_word.get(index, "<unk>")
     def text_to_attr(self):
         return_mat = []
         for _word in self._buffer:
@@ -209,30 +193,3 @@ class corpus:
                 y = np.zeros_like(x)
                 y[:, :-1], y[:, -1] = x[:, 1:], x[:, 0]
                 yield x, y
-
-def train():
-    obj = corpus(path, 32, 26)
-    with shelve.open(obj_path) as fp:
-        fp["obj"] = obj
-    model = lstm_model(hidden_size=128, num_layer=2, 
-                     corpus=obj, keep_prob=1.0, 
-                     embedding_size=128, max_step=10000,
-                     lr=0.005)
-    model.train()
-
-def test(str, max_sample=200):
-    obj = None
-    assert os.path.exists("{0}.bak".format(obj_path)), "找不到文件"
-    with shelve.open(obj_path) as fp:
-        obj = fp["obj"]
-    model = lstm_model(hidden_size=128, num_layer=2, 
-                     corpus=obj, keep_prob=1.0, 
-                     embedding_size=128, max_step=10000,
-                     lr=0.001, sampling=True)
-    model.load_model()
-    sample = model.sampling(obj.sentence_to_int(str), max_sample)
-    print(obj.int_to_sentence(sample))
-
-if __name__ == "__main__":
-#     train()
-    test("何人无不见，此地自何如。", max_sample=300)
