@@ -10,11 +10,8 @@ import tensorflow as tf
 
 def pick_top_n(preds, vocab_size, top_n=5):
     p = np.squeeze(preds)
-    # 将除了top_n个预测值的位置都置为0
     p[np.argsort(p)[:-top_n]] = 0
-    # 归一化概率
     p = p / np.sum(p)
-    # 随机选取一个字符
     c = np.random.choice(vocab_size, 1, p=p)[0]
     return c
 
@@ -29,7 +26,7 @@ class lstm_model:
         else:
             self._num_seq = 1
             self._num_step = 1
-            self._save_path = save_path
+        self._save_path = save_path
         self._lr = lr
         self._max_step = max_step
         self._embedding_size = embedding_size
@@ -78,6 +75,7 @@ class lstm_model:
         self._optimizer = optimizer.apply_gradients(zip(grads, vars))
     def train(self):
         with tf.Session() as sess:
+            return_mat = []
             sess.run(tf.global_variables_initializer())
             state = sess.run(self._init_state)
             step = 0
@@ -87,12 +85,14 @@ class lstm_model:
                         self._init_state:state}
                 loss, _, state = sess.run([self._loss, self._optimizer, 
                                            self._final_state], feed_dict = feed)
+                return_mat.append(loss)
                 step += 1
                 if step % 10 == 0:
                     print("迭代次数：{0:d}/{2:d}，当前损失：{1:.3f}".format(step, loss, self._max_step))
                 if step == self._max_step:
                     break
             tf.train.Saver().save(sess, "{0}model".format(self._save_path), global_step=step)
+        return return_mat
     def load_model(self):
         sess = tf.Session()
         tf.train.Saver().restore(sess, tf.train.latest_checkpoint(self._save_path))
