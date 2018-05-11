@@ -1,4 +1,4 @@
-'''
+﻿'''
 Created on 2018年5月8日
 
 @author: IL MARE
@@ -7,6 +7,7 @@ import collections
 import numpy as np
 from tensorflow.contrib import rnn
 import tensorflow as tf
+import time
 
 def pick_top_n(preds, vocab_size, top_n=5):
     p = np.squeeze(preds)
@@ -79,6 +80,7 @@ class lstm_model:
             sess.run(tf.global_variables_initializer())
             state = sess.run(self._init_state)
             step = 0
+            start = time.clock()
             for x, y in self._corpus.generate_batch():
                 feed = {self._x: x, 
                         self._y: y,
@@ -88,11 +90,15 @@ class lstm_model:
                 return_mat.append(loss)
                 step += 1
                 if step % 10 == 0:
-                    print("迭代次数：{0:d}/{2:d}，当前损失：{1:.3f}".format(step, loss, self._max_step))
+                    end = time.clock()
+                    interval = end - start
+                    yield return_mat
+                    print("迭代次数：{0:d}/{2:d}，当前损失：{1:.3f}，迭代速度：{3:.3f} 秒/十次，约需要{4:.3f}秒"
+                          .format(step, loss, self._max_step, interval, ((self._max_step - step) / 10) * interval))
+                    start = time.clock()
                 if step == self._max_step:
                     break
             tf.train.Saver().save(sess, "{0}model".format(self._save_path), global_step=step)
-        return return_mat
     def load_model(self):
         sess = tf.Session()
         tf.train.Saver().restore(sess, tf.train.latest_checkpoint(self._save_path))
