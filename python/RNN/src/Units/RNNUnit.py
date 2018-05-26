@@ -23,7 +23,7 @@ def train_model():
         fp["obj"] = obj
     model = lstm_model(hidden_size=128, num_layer=2, 
                      corpus=obj, keep_prob=1.0, 
-                     embedding_size=128, max_step=10000,
+                     embedding_size=128, max_step=5000,
                      lr=0.005, save_path=save_path)
     fig = plt.figure("cross-entropy")
     mpl.rcParams['xtick.labelsize'] = 8
@@ -44,7 +44,7 @@ def test_model(init_str, max_sample=200):
         obj = fp["obj"]
     model = lstm_model(hidden_size=128, num_layer=2, 
                      corpus=obj, keep_prob=1.0, 
-                     embedding_size=128, max_step=10000,
+                     embedding_size=128, max_step=5000,
                      lr=0.005, save_path=save_path, sampling=True)
     model.load_model()
     sample = model.sampling(obj.sentence_to_int(init_str), max_sample)
