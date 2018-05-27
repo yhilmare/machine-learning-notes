@@ -51,5 +51,5 @@ def test_model(init_str, max_sample=200):
     print(obj.int_to_sentence(sample))
 
 if __name__ == "__main__":
-    train_model()
-#     test_model("", max_sample=1500)
+#    train_model()
+    test_model("", max_sample=1500)
