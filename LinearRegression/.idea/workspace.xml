@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d63b5543-a531-4e94-8f44-5649e922190a" name="Default Changelist" comment="">
+    <list default="true" id="78248c23-bd93-40cc-971e-829a3f929626" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/../CNN/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../FacePlus/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CNN/.project" beforeDir="false" />
@@ -63,19 +63,6 @@
       <change beforePath="$PROJECT_DIR$/../LogisticRegression/src/Util/DataUtil.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../LogisticRegression/src/Util/RandomUtil.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../LogisticRegression/src/Util/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/RNN.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/RNN.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.pydevproject" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lib/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lib/model.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/RNNUnit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/Word2VecUnit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/handWrittenUnit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/handWrittenUnit_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Units/tempTest.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../RandomForest/.project" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../RandomForest/.pydevproject" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../RandomForest/src/Lib/RFLib.py" beforeDir="false" />
@@ -96,7 +83,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FUSProjectUsageTrigger">
-    <session id="496954999">
+    <session id="52598733">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="1" />
@@ -125,8 +112,13 @@
         <subPane>
           <expand>
             <path>
-              <item name="RNN" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RNN" type="462c0819:PsiDirectoryNode" />
+              <item name="LinearRegression" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinearRegression" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinearRegression" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinearRegression" type="462c0819:PsiDirectoryNode" />
+              <item name="Lib" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -151,11 +143,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d63b5543-a531-4e94-8f44-5649e922190a" name="Default Changelist" comment="" />
-      <created>1557386108174</created>
+      <changelist id="78248c23-bd93-40cc-971e-829a3f929626" name="Default Changelist" comment="" />
+      <created>1557386018745</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1557386108174</updated>
+      <updated>1557386018745</updated>
     </task>
     <servers />
   </component>
