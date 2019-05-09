@@ -1,108 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c7e2e20b-33f6-46c8-aade-997aa522d152" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../CNN/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FacePlus/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CNN/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CNN/.pydevproject" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CNN/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CNN/src/Libs/AlexNet.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CNN/src/Libs/InceptionNet.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CNN/src/Libs/SimpleCNN.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CNN/src/Libs/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CNN/src/Units/CNNUnit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CNN/src/Units/YCFUnit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CNN/src/Units/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CNN/src/Utils/DataUtil.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CNN/src/Utils/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DecisionTree/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DecisionTree/.pydevproject" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DecisionTree/src/Lib/DecisionTreeLib.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DecisionTree/src/Lib/RFLib.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DecisionTree/src/Lib/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DecisionTree/src/Unit/DecisionTreeUnit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DecisionTree/src/Unit/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DecisionTree/src/Util/DataUtil.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DecisionTree/src/Util/RandomUtil.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DecisionTree/src/Util/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FacePlus/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FacePlus/.pydevproject" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FacePlus/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FacePlus/src/Libs/AverageFace.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FacePlus/src/Libs/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FacePlus/src/Unit/CaptureUnit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FacePlus/src/Unit/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FacePlus/src/Unit/ghostdriver.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FacePlus/src/Utils/LandMarkUtil.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FacePlus/src/Utils/ZhiHuUtil.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FacePlus/src/Utils/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FacePlus/src/Utils/ghostdriver.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FaceReplace/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FaceReplace/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FaceReplace/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FaceReplace/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../KNN/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../KNN/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../KNN/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../KNN/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../KNN/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../KNN/.pydevproject" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../KNN/src/Lib/KNNLib.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../KNN/src/Lib/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../KNN/src/Unit/KNNUnit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../KNN/src/Unit/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LogisticRegression/.idea/LogisticRegression.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LogisticRegression/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LogisticRegression/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LogisticRegression/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LogisticRegression/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LogisticRegression/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LogisticRegression/.pydevproject" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LogisticRegression/src/Lib/LogisticLib.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LogisticRegression/src/Lib/RFLib.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LogisticRegression/src/Lib/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LogisticRegression/src/Unit/LRUnit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LogisticRegression/src/Unit/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LogisticRegression/src/Util/DataUtil.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LogisticRegression/src/Util/RandomUtil.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LogisticRegression/src/Util/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RNN/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../RNN/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RNN/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../RNN/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RNN/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RNN/.pydevproject" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RNN/src/Lib/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RNN/src/Lib/model.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RNN/src/Units/RNNUnit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RNN/src/Units/Word2VecUnit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RNN/src/Units/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RNN/src/Units/handWrittenUnit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RNN/src/Units/handWrittenUnit_2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RNN/src/Units/tempTest.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RandomForest/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RandomForest/.pydevproject" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RandomForest/src/Lib/RFLib.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RandomForest/src/Lib/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RandomForest/src/Unit/RFUnit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RandomForest/src/Unit/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RandomForest/src/Util/DataUtil.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RandomForest/src/Util/RandomUtil.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RandomForest/src/Util/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SVMLib/.idea/SVMLib.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SVMLib/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SVMLib/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SVMLib/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SVMLib/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SVMLib/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SVMLib/.pydevproject" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SVMLib/src/Lib/RFLib.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SVMLib/src/Lib/SVMLib.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SVMLib/src/Lib/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SVMLib/src/Unit/SVMUnit.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SVMLib/src/Unit/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SVMLib/src/Util/DataUtil.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SVMLib/src/Util/RandomUtil.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SVMLib/src/Util/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../image/rnn-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../image/rnn-2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../image/rnn.png" beforeDir="false" />
-    </list>
+    <list default="true" id="c7e2e20b-33f6-46c8-aade-997aa522d152" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,9 +12,10 @@
     <session id="-668153127">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
     </session>
@@ -134,6 +34,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -150,8 +51,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Resource_estimation/model" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -181,13 +84,9 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -195,6 +94,10 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
