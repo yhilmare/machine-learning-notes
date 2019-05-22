@@ -247,7 +247,7 @@ class AutoEncoder:
                 tmp_list = []
                 fileName_list = []
     def generateImage(self):
-        source = cv2.imread(r"F:/tensorflow/automodel/scrawler/video/trainImg/18.jpg")
+        source = cv2.imread(r"F:/tensorflow/automodel/scrawler/video/trainImg/70.jpg")
         sourceWarp, sourceTarget = get_training_data(np.array([source]), 1)
         # sourceWarp = sourceWarp / 255.0
         sourceTarget = sourceTarget / 255.0
@@ -633,8 +633,6 @@ class ConvolutionalAutoencoder:
         cv2.imshow("aaa", dest)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
-
-
 
 if __name__ == "__main__":
     obj = AutoEncoder(5e-5, 100, 64, "F:/tensorflow/automodel/model_1/")
