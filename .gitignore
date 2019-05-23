@@ -1,5 +1,5 @@
-# Õë¶Ôidea±à¼­Æ÷
-*/.idea
+# for idea
+*/.idea/
 
-# Õë¶Ôjupyter notebook
-*/.ipynb_checkpoints
+# for jupyter notebook
+*/.ipynb_checkpoints/
