@@ -59,7 +59,7 @@ class lstm_model:
         outputs, self._final_state = tf.nn.dynamic_rnn(mul_cell, self._inputs, 
                                                        initial_state=self._init_state)
         outputs = tf.reshape(outputs, [-1, self._hidden_size])
-        W = tf.Variable(tf.truncated_normal([self._hidden_size, self._corpus.word_num], 
+        W = tf.Variable(tf.truncated_normal([self._hidden_size, self._corpus.word_num],
                                             stddev=0.1, dtype=tf.float32))
         bais = tf.Variable(tf.zeros([1, self._corpus.word_num], 
                                     dtype=tf.float32), dtype=tf.float32)
@@ -71,7 +71,7 @@ class lstm_model:
                                                    reduction_indices=[1]))
     def define_gradients(self):
         vars = tf.trainable_variables()
-        grads, _ = tf.clip_by_global_norm(tf.gradients(self._loss, vars), 5)
+        grads, _ = tf.clip_by_global_norm(tf.gradients(self._loss, vars), 3)
         optimizer = tf.train.AdamOptimizer(self._lr)
         self._optimizer = optimizer.apply_gradients(zip(grads, vars))
     def train(self):
@@ -127,7 +127,7 @@ class lstm_model:
 
 class corpus:
     '''
-            该对象用于构造语料库，参数解释：
+    该对象用于构造语料库，参数解释：
     file_path:语料库所在位置
     num_seq:一个batch中所包含的句子数
     num_step:一个句子中包含的词的数目
@@ -200,4 +200,10 @@ class corpus:
                 y[:, :-1], y[:, -1] = x[:, 1:], x[:, 0]
                 yield x, y
 
-
+if __name__ == "__main__":
+    _x = tf.placeholder(dtype=tf.int32,
+                             shape=[100, 50])
+    embedding = tf.get_variable("embedding",
+                                    shape=[5000, 128], dtype=tf.float32)
+    _inputs = tf.nn.embedding_lookup(embedding, _x)
+    print(_inputs.shape)

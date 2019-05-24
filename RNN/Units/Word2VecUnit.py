@@ -95,7 +95,7 @@ vaildExamples = np.random.choice(vaildWindow, vaildSize, replace=False)#随机�
 numSampled = 64#噪声词汇的数目
 
 if __name__ == "__main__":
-    fileName = "text8.zip"
+    fileName = r"F:\tensorflow\rnn\data\w2v\text8.zip"
     download_file(fileName, 31344016)
     words = read_data(fileName)
     data, count, dic, reverse_dic = build_dataSet(words)
@@ -114,11 +114,11 @@ if __name__ == "__main__":
             nceWeight = tf.Variable(tf.truncated_normal
                         ([vocabularySize, embeddingSize], stddev=1.0 / math.sqrt(embeddingSize)))
             nceBiases = tf.Variable(tf.zeros([vocabularySize]))
-            nceLoss = tf.reduce_mean(tf.nn.nce_loss(nceWeight, 
-                                     nceBiases, 
-                                     trainLabels, 
-                                     embed, 
-                                     numSampled, 
+            nceLoss = tf.reduce_mean(tf.nn.nce_loss(nceWeight,
+                                     nceBiases,
+                                     trainLabels,
+                                     embed,
+                                     numSampled,
                                      vocabularySize))
             optimizer = tf.train.GradientDescentOptimizer(0.5).minimize(nceLoss)
             normal = tf.sqrt(tf.reduce_sum(tf.square(embeddings), 1, keepdims=True))
