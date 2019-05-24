@@ -125,6 +125,48 @@ class lstm_model:
             sample.append(c)
         return sample
 
+    [[0.01369425  0.055067    0.15580763... - 0.11208464  0.00187365
+      0.04439854]
+     [-0.00938707  0.04230532  0.13813736... - 0.00985201  0.07611084
+     - 0.09051637]
+    [0.04954345
+    0.03204703
+    0.07254507...
+    0.03494264
+    0.02680823
+    0.04910018]
+    ...
+    [-0.13780423
+    0.08843216
+    0.15070744... - 0.15295589
+    0.1154476
+    - 0.01546929]
+    [-0.0177818 - 0.05325845  0.05570015... - 0.04587761  0.12779158
+     - 0.08012373]
+    [0.00849253
+    0.15980686
+    0.19446087... - 0.09882314
+    0.14683138
+    0.03961423]]
+
+Nearst to "would" : can - <0.426>, to - <0.424>, transformation - <0.421>, says - <0.421>, adults - <0.416>, had - <0.398>, instrumental - <0.396>, like - <0.388>
+Nearst to "known" : repeatedly - <0.413>, regarded - <0.394>, falls - <0.394>, joint - <0.375>, available - <0.369>, sir - <0.365>, UNK - <0.364>, select - <0.362>
+Nearst to "three" : four - <0.740>, five - <0.706>, two - <0.706>, zero - <0.703>, six - <0.695>, eight - <0.691>, seven - <0.661>, one - <0.633>
+Nearst to "world" : holding - <0.423>, died - <0.415>, holy - <0.394>, first - <0.393>, wayne - <0.391>, sea - <0.390>, mathbf - <0.382>, focus - <0.379>
+Nearst to "history" : UNK - <0.424>, identical - <0.419>, state - <0.418>, orbital - <0.415>, next - <0.413>, boston - <0.411>, list - <0.410>, frequent - <0.408>
+Nearst to "but" : however - <0.503>, that - <0.462>, ties - <0.462>, sky - <0.456>, exposed - <0.452>, generally - <0.441>, because - <0.430>, landscape - <0.414>
+Nearst to "most" : supporters - <0.419>, earned - <0.406>, friendly - <0.405>, anarchist - <0.397>, absence - <0.394>, articles - <0.389>, apparent - <0.386>, difference - <0.385>
+Nearst to "states" : co - <0.477>, symbolic - <0.428>, market - <0.412>, by - <0.408>, skills - <0.396>, legs - <0.395>, in - <0.392>, alphabet - <0.382>
+Nearst to "only" : respectively - <0.434>, powerful - <0.404>, warming - <0.400>, transform - <0.392>, showing - <0.391>, theory - <0.389>, georgia - <0.383>, adventures - <0.382>
+Nearst to "while" : and - <0.411>, enlightenment - <0.409>, started - <0.405>, conduct - <0.403>, convention - <0.396>, academy - <0.390>, lived - <0.390>, novels - <0.384>
+Nearst to "other" : additional - <0.418>, fall - <0.415>, recovery - <0.398>, caught - <0.391>, gene - <0.390>, egyptian - <0.386>, different - <0.382>, some - <0.371>
+Nearst to "which" : that - <0.490>, this - <0.435>, max - <0.424>, and - <0.410>, images - <0.408>, success - <0.407>, benefit - <0.404>, five - <0.403>
+Nearst to "they" : why - <0.401>, assassination - <0.401>, he - <0.400>, occasions - <0.400>, southwest - <0.391>, inherited - <0.383>, democrats - <0.382>, norwegian - <0.378>
+Nearst to "as" : detail - <0.459>, constitutional - <0.432>, error - <0.416>, cd - <0.412>, compiler - <0.407>, million - <0.405>, certain - <0.404>, creation - <0.397>
+Nearst to "use" : deal - <0.438>, maintain - <0.406>, sphere - <0.392>, office - <0.390>, energy - <0.388>, effects - <0.385>, anarchist - <0.384>, every - <0.382>
+Nearst to "has" : had - <0.468>, have - <0.455>, is - <0.439>, representative - <0.415>, was - <0.398>, kind - <0.395>, jordan - <0.385>, speech - <0.378>
+
+
 class corpus:
     '''
     该对象用于构造语料库，参数解释：

@@ -56,4 +56,4 @@ def test_model(init_str, max_sample=200):
 
 if __name__ == "__main__":
     # train_model()
-    test_model("程心", max_sample=1500)
+    test_model("程心", max_sample=500)
