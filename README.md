@@ -12,7 +12,7 @@
 
 ![](https://github.com/yhswjtuILMARE/Machine-Learning-Study-Notes/blob/master/pics/fr-8.jpg)
 
-在这里，你也可以根据数百张人联合成一张平均脸的demo：
+在这里，你也可以看到根据数百张人脸合成一张平均脸的demo：
 
 ![](https://github.com/yhswjtuILMARE/Machine-Learning-Study-Notes/blob/master/pics/fa-1.jpg)
 
