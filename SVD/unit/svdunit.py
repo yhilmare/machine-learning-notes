@@ -94,7 +94,7 @@ def svd(matrix):
 
 if __name__ == "__main__":
     v = np.asmatrix([[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]], dtype=np.float32)
-    W = np.asmatrix([[0.5, 0.866], [-0.866, 0.5]], dtype=np.float32)
+    W = np.asmatrix([[-0.866, 0.5], [0.5, 0.866]], dtype=np.float32)
     v1 = (W * v.T).T
     print(v1.T)
     fig = plt.figure("test")
