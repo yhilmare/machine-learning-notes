@@ -93,17 +93,6 @@ def svd(matrix):
         return U.real, sigma, V.real.T
 
 if __name__ == "__main__":
-    v = np.asmatrix([[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]], dtype=np.float32)
-    W = np.asmatrix([[-0.866, 0.5], [0.5, 0.866]], dtype=np.float32)
-    v1 = (W * v.T).T
-    print(v1.T)
-    fig = plt.figure("test")
-    ax = fig.add_subplot(111)
-    ax.grid(True)
-    ax.plot(v[:, 0], v[:, 1])
-    ax.plot(v1[:, 0], v1[:, 1])
-
-    plt.xlim(-2.5, 2.5)
-    plt.ylim(-2.5, 2.5)
-    plt.show()
+    A = np.asmatrix([[0, 1], [1, 1], [1, 0]], dtype=np.float32)
+    print(np.linalg.eig(A))
 
