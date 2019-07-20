@@ -110,5 +110,5 @@ class AGNAutoEncoder:
         # bx = fig.add_subplot(122)
         # bx.imshow(dest)
         # plt.show()
-        cv2.imshow("lalal", dest)
+        cv2.imshow("test", dest)
         cv2.waitKey(0)
